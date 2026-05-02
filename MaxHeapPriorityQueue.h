@@ -6,12 +6,12 @@
 
 class MaxHeapPriorityQueue {
     private:
-        QueueElement* heap;
-        int size;
-        int capacity;
+        QueueElement* heap; //dynamiczna tablica przechowujaca kopiec
+        int size; // aktualna liczba elementow
+        int capacity; // pojemnosc tablicy
 
-        void heapifyUp(int index);
-        void resize();
+        void heapifyUp(int index); //naprawaia kopiec po dodaniu elementu
+        void resize(); //podwaja pojemnosc tablicy
 
     public:
         MaxHeapPriorityQueue();
@@ -19,10 +19,10 @@ class MaxHeapPriorityQueue {
 
         void print();
 
-        int returnSize();
-        void insert(int value, int priority);
+        int returnSize(); // zwraca liczbe elemntow
+        void insert(int value, int priority); // dodaje eleemnt do kolejki
 
-        QueueElement peek();
+        QueueElement peek(); //zwraca element o najwiekszym priorytecie
         
 };
 

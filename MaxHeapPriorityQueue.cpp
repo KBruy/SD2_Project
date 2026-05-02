@@ -8,7 +8,7 @@ MaxHeapPriorityQueue::MaxHeapPriorityQueue() {
 }
 
 MaxHeapPriorityQueue::~MaxHeapPriorityQueue() {
-    delete[] heap;
+    delete[] heap; //zwolnienie pamieci
 }
 
 int MaxHeapPriorityQueue::returnSize() {
@@ -16,19 +16,23 @@ int MaxHeapPriorityQueue::returnSize() {
 }
 
 void MaxHeapPriorityQueue::insert(int value, int priority) {
-    if (size == capacity) {
+    // jezeli tablica jest pelna, zwiekszamy jej pojemnosc
+    if (size == capacity) { 
         resize();
     }
 
+    //dodajemy nowy element na koniec kopca
     heap[size].value = value;
     heap[size].priority = priority;
 
+    //naprawamiay kopiec po dodaniu
     heapifyUp(size);
 
     size ++;
 }
 
 void MaxHeapPriorityQueue::heapifyUp(int index) {
+    //przesuwamy element w gore dopki ma wikeszy priorytet niz rodzic
     while (index > 0) {
         int parentIndex = (index - 1) / 2;
 
@@ -61,9 +65,11 @@ void MaxHeapPriorityQueue::print() {
 }
 
 void MaxHeapPriorityQueue::resize() {
+    //tworzymy nowa wieksz tablice
     int newCapacity = capacity * 2;
     QueueElement* newHeap = new QueueElement[newCapacity];
 
+    //przepisanie starych elemntow do nowej tablicy
     for (int i = 0; i < size; i++) {
         newHeap[i] = heap[i];
     }
@@ -75,12 +81,14 @@ void MaxHeapPriorityQueue::resize() {
 }
 
 QueueElement MaxHeapPriorityQueue::peek() {
+    // dla pustej kolejki zwracamy wartosci "umowne" 
     if (size == 0) {
         QueueElement emptyElement;
         emptyElement.value = -1;
         emptyElement.priority = -1;
         return emptyElement;
+        // -1 -> kolejka byla pusta
     }
-
+    // w kopcu max najwiekszy priorytet jest zawsze w korzeniu
     return heap[0];
 }

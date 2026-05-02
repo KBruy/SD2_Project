@@ -13,17 +13,23 @@ int main() {
 
     queue.print();
 
-    QueueElement removed = queue.extractMax();
+    bool changed = queue.modifyKey(200, 50);
 
-    std::cout << "Usunieto max: "
-              << removed.value
-              << ", priorytet: "
-              << removed.priority
-              << std::endl;
+    if (changed) {
+        std::cout << "Zmieniono priorytet elementu 200." << std::endl;
+    } else {
+        std::cout << "Nie znaleziono elementu." << std::endl;
+    }
 
     queue.print();
 
-    std::cout << "Rozmiar: " << queue.returnSize() << std::endl;
+    QueueElement maxElement = queue.peek();
+
+    std::cout << "Najwiekszy element: "
+              << maxElement.value
+              << ", priorytet: "
+              << maxElement.priority
+              << std::endl;
 
     return 0;
 }

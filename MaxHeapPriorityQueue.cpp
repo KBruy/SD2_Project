@@ -149,3 +149,34 @@ QueueElement MaxHeapPriorityQueue::extractMax() {
 
     return maxElement;
 }
+
+bool MaxHeapPriorityQueue::modifyKey(int value, int newPriority) {
+    int foundIndex = -1;
+
+    // szukamy pierwszego elementu o podanej wartosci
+    for (int i = 0; i < size; i++) {
+        if(heap[i].value == value) {
+            foundIndex = i;
+            break;
+        }
+    }
+
+    // jezeli nie znaleziono elemenut -> false
+    if (foundIndex == -1) {
+        return false;
+    }
+
+    int oldPriority = heap[foundIndex].priority;
+    heap[foundIndex].priority = newPriority;
+
+    // jezeli priorytet wzrosl, element moze isc w gore
+    if (newPriority > oldPriority) {
+        heapifyUp(foundIndex);
+    }
+    // jezeli priorytet zmalal, element moze isc w dol
+    else if (newPriority < oldPriority) {
+        heapifyDown(foundIndex);
+    }
+
+    return true;
+}

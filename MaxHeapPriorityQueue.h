@@ -27,6 +27,10 @@ class MaxHeapPriorityQueue {
         QueueElement peek(); //zwraca element o najwiekszym priorytecie
 
         QueueElement extractMax(); // usuwa i zwraca element o najwiekszym priorytecie
+
+        bool modifyKey(int value, int newPriority); //zmienia priorytet pierwszego znalezionego elementu
+        // zwraca true jezeli znaleziono element i zmieniono priorytet
+        //false jesli nie znaleziono elementu
         
 };
 

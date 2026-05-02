@@ -11,6 +11,7 @@ class MaxHeapPriorityQueue {
         int capacity;
 
         void heapifyUp(int index);
+        void resize();
 
     public:
         MaxHeapPriorityQueue();

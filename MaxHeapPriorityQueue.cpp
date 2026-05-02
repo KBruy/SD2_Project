@@ -17,7 +17,7 @@ int MaxHeapPriorityQueue::returnSize() {
 
 void MaxHeapPriorityQueue::insert(int value, int priority) {
     if (size == capacity) {
-        return;
+        resize();
     }
 
     heap[size].value = value;
@@ -58,4 +58,18 @@ void MaxHeapPriorityQueue::print() {
     }
 
     std::cout << std::endl;
+}
+
+void MaxHeapPriorityQueue::resize() {
+    int newCapacity = capacity * 2;
+    QueueElement* newHeap = new QueueElement[newCapacity];
+
+    for (int i = 0; i < size; i++) {
+        newHeap[i] = heap[i];
+    }
+
+    delete[] heap;
+
+    heap = newHeap;
+    capacity = newCapacity;
 }

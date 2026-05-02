@@ -11,10 +11,12 @@ int main() {
     queue.insert(200, 10);
     queue.insert(300, 3);
     queue.insert(400, 20);
+    queue.insert(500,15);
+    queue.insert(600, 30);
 
     queue.print();
 
-    std::cout << "Rozmiar po dodaniu: " << queue.returnSize() << std::endl;
+    std::cout << "Rozmiar: " << queue.returnSize() << std::endl;
 
     return 0;
 }

@@ -73,3 +73,14 @@ void MaxHeapPriorityQueue::resize() {
     heap = newHeap;
     capacity = newCapacity;
 }
+
+QueueElement MaxHeapPriorityQueue::peek() {
+    if (size == 0) {
+        QueueElement emptyElement;
+        emptyElement.value = -1;
+        emptyElement.priority = -1;
+        return emptyElement;
+    }
+
+    return heap[0];
+}

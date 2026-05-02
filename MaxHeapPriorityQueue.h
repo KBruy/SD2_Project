@@ -21,6 +21,8 @@ class MaxHeapPriorityQueue {
 
         int returnSize();
         void insert(int value, int priority);
+
+        QueueElement peek();
         
 };
 

@@ -13,6 +13,8 @@ class MaxHeapPriorityQueue {
         void heapifyUp(int index); //naprawaia kopiec po dodaniu elementu
         void resize(); //podwaja pojemnosc tablicy
 
+        void heapifyDown(int index); //naprawia kopiec po usunieciu elementu
+
     public:
         MaxHeapPriorityQueue();
         ~MaxHeapPriorityQueue();
@@ -23,6 +25,8 @@ class MaxHeapPriorityQueue {
         void insert(int value, int priority); // dodaje eleemnt do kolejki
 
         QueueElement peek(); //zwraca element o najwiekszym priorytecie
+
+        QueueElement extractMax(); // usuwa i zwraca element o najwiekszym priorytecie
         
 };
 

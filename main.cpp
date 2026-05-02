@@ -13,13 +13,15 @@ int main() {
 
     queue.print();
 
-    QueueElement maxElement = queue.peek();
+    QueueElement removed = queue.extractMax();
 
-    std::cout << "Najwiekszy element: "
-              << maxElement.value
+    std::cout << "Usunieto max: "
+              << removed.value
               << ", priorytet: "
-              << maxElement.priority
+              << removed.priority
               << std::endl;
+
+    queue.print();
 
     std::cout << "Rozmiar: " << queue.returnSize() << std::endl;
 

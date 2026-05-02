@@ -81,14 +81,71 @@ void MaxHeapPriorityQueue::resize() {
 }
 
 QueueElement MaxHeapPriorityQueue::peek() {
-    // dla pustej kolejki zwracamy wartosci "umowne" 
+    // dla pustej kolejki zwracamy -1
     if (size == 0) {
         QueueElement emptyElement;
         emptyElement.value = -1;
         emptyElement.priority = -1;
         return emptyElement;
-        // -1 -> kolejka byla pusta
+       
     }
     // w kopcu max najwiekszy priorytet jest zawsze w korzeniu
     return heap[0];
+}
+
+void MaxHeapPriorityQueue::heapifyDown(int index) {
+    while (true) {
+        int leftChild = 2 * index + 1;
+        int rightChild = 2 * index + 2;
+        int largest = index;
+
+        //sprawdzamy czy lewe dziecko ma wiekszy priorytet
+        if (leftChild < size && heap[rightChild].priority > heap[largest].priority) {
+            largest = rightChild;
+        }
+
+        // -||- czy prawe
+        if (rightChild < size && heap[rightChild].priority > heap[largest].priority) {
+            largest = rightChild;
+        }
+
+        // jesli rodzic jest najwiekszy, kopiec jest poprawny
+        if (largest == index) {
+            break;
+        }
+
+        //zamieniamy rodzica z wiekszym dzieckiem
+
+        QueueElement temp = heap[index];
+        heap[index] = heap[largest];
+        heap[largest] = temp;
+
+        index = largest;
+    }
+}
+
+QueueElement MaxHeapPriorityQueue::extractMax() {
+    //jezeli kolejka jest pusta, zwracamy wartosci -1
+    if (size == 0) {
+        QueueElement emptyElement;
+        emptyElement.value = -1;
+        emptyElement.priority = -1;
+        return emptyElement;
+
+    }
+
+    QueueElement maxElement = heap[0];
+
+    // ostatni element przenosimy do korzenia
+    heap[0] = heap[size - 1];
+    size--;
+
+    //bierzemy heap[size -1] żeby nie została dziura (gdybyśmy usuwali heap[0])
+
+    //naprawiamy kopiec od gory
+    if (size > 0) {
+        heapifyDown(0);
+    }
+
+    return maxElement;
 }

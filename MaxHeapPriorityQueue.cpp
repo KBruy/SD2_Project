@@ -1,4 +1,5 @@
 #include "MaxHeapPriorityQueue.h"
+#include <iostream>
 
 MaxHeapPriorityQueue::MaxHeapPriorityQueue() {
     size = 0;
@@ -21,5 +22,40 @@ void MaxHeapPriorityQueue::insert(int value, int priority) {
 
     heap[size].value = value;
     heap[size].priority = priority;
+
+    heapifyUp(size);
+
     size ++;
+}
+
+void MaxHeapPriorityQueue::heapifyUp(int index) {
+    while (index > 0) {
+        int parentIndex = (index - 1) / 2;
+
+        if (heap[parentIndex].priority >= heap[index].priority) {
+            break;
+        }
+
+        QueueElement temp = heap[parentIndex];
+        heap[parentIndex] = heap[index];
+        heap[index] = temp;
+
+        index = parentIndex;
+    }
+    
+}
+
+void MaxHeapPriorityQueue::print() {
+    if (size == 0) {
+        std::cout << "Kolejka jest pusta" << std::endl;
+        return;
+    }
+
+    std::cout << "Kopiec: " << std::endl;
+    
+    for (int i = 0; i < size; i++) {
+        std::cout << "("<<heap[i].value << ", p= " << heap[i].priority << ") ";
+    }
+
+    std::cout << std::endl;
 }

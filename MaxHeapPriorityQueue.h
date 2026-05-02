@@ -10,12 +10,17 @@ class MaxHeapPriorityQueue {
         int size;
         int capacity;
 
+        void heapifyUp(int index);
+
     public:
         MaxHeapPriorityQueue();
         ~MaxHeapPriorityQueue();
 
+        void print();
+
         int returnSize();
         void insert(int value, int priority);
+        
 };
 
 #endif

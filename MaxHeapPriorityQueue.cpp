@@ -13,3 +13,13 @@ MaxHeapPriorityQueue::~MaxHeapPriorityQueue() {
 int MaxHeapPriorityQueue::returnSize() {
     return size;
 }
+
+void MaxHeapPriorityQueue::insert(int value, int priority) {
+    if (size == capacity) {
+        return;
+    }
+
+    heap[size].value = value;
+    heap[size].priority = priority;
+    size ++;
+}

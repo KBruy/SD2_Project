@@ -15,6 +15,7 @@ class MaxHeapPriorityQueue {
         ~MaxHeapPriorityQueue();
 
         int returnSize();
+        void insert(int value, int priority);
 };
 
 #endif

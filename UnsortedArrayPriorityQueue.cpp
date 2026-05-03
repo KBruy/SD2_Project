@@ -62,3 +62,25 @@ void UnsortedArrayPriorityQueue::print() {
 
     std::cout << std::endl;
 }
+
+QueueElement UnsortedArrayPriorityQueue::peek() {
+    // jezeli kolejka jest pusta to zwracamy -1
+
+    if (size == 0) {
+        QueueElement emptyElemnt;
+        emptyElemnt.value = -1;
+        emptyElemnt.priority = -1;
+        return emptyElemnt;
+    }
+
+    int maxIndex = 0;
+
+    //szukanie elementu z najwiszkym priorytetem, zwraca index
+    for (int i = 1; i < size; i++){
+        if (array[i].priority > array[maxIndex].priority) {
+            maxIndex = i;
+        }
+    }
+
+    return array[maxIndex];
+}

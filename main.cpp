@@ -12,6 +12,8 @@ int main() {
 
     queue.print();
 
+    QueueElement maxElement = queue.peek();
+    std::cout << "Najwiekszy element: " <<maxElement.value << ", priorytet: " << maxElement.priority << std::endl;
     std::cout << "Rozmiar: " << queue.returnSize() << std::endl;
 
     return 0;

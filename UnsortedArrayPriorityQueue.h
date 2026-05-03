@@ -22,6 +22,8 @@ class UnsortedArrayPriorityQueue {
 
         QueueElement peek(); //zwraca element o najwiekszym priorytecie
         QueueElement extractMax(); // usuwa elemnt o najwiekszym priorytecie i zwraca go
+
+        bool modifyKey(int value, int newPriority); // zmienia priorytet pierwszego znalezionego elementu 
     
 };
 

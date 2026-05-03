@@ -114,3 +114,15 @@ QueueElement UnsortedArrayPriorityQueue::extractMax() {
 
     return maxElement;
 }
+
+bool UnsortedArrayPriorityQueue::modifyKey(int value, int newPriority) {
+    //szuakmy pierwszego elementu o podanej wartosci
+    for (int i = 0; i < size; i++) {
+        if (array[i].value == value) {
+            array[i].priority = newPriority;
+            return true;
+        }
+    }
+
+    return false;
+}

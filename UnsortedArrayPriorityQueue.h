@@ -21,6 +21,7 @@ class UnsortedArrayPriorityQueue {
         void insert(int value, int priority); //dodaje element
 
         QueueElement peek(); //zwraca element o najwiekszym priorytecie
+        QueueElement extractMax(); // usuwa elemnt o najwiekszym priorytecie i zwraca go
     
 };
 

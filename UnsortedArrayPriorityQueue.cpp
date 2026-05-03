@@ -84,3 +84,35 @@ QueueElement UnsortedArrayPriorityQueue::peek() {
 
     return array[maxIndex];
 }
+
+QueueElement UnsortedArrayPriorityQueue::extractMax() {
+    //jezeli kolejka jest pusta, zwracamy -1
+    if (size == 0) {
+        QueueElement emptyElement;
+        emptyElement.value = -1;
+        emptyElement.priority = -1;
+        return emptyElement;
+
+    }
+
+    int maxIndex = 0;
+
+    //szukamy indeksu elementu o najwszykim priorytecie
+    for (int i = 1; i < size; i++) {
+        if (array[i].priority > array[maxIndex].priority) {
+            maxIndex = i;
+        }
+    }
+
+    //zapamietujemy element, ktory zostanie usuniety
+    QueueElement maxElement = array[maxIndex];
+
+    //przesuwamy elementy w lewo, aby usunac znaleziony element
+    for (int i = maxIndex; i < size - 1; i++) {
+        array[i] = array[i+1];
+    }
+
+    size--;
+
+    return maxElement;
+}

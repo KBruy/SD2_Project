@@ -4,8 +4,15 @@
 int main() {
     UnsortedArrayPriorityQueue queue;
 
-    std::cout << "Kolejka priorytetowa MAX - tablica nieposortowana" << std::endl;
-    std::cout << "Rozmiar kolejki: " << queue.returnSize() << std::endl;
+    queue.insert(100, 5);
+    queue.insert(200, 30);
+    queue.insert(300, 10);
+    queue.insert(400, 1);
+    queue.insert(500, 20);
+
+    queue.print();
+
+    std::cout << "Rozmiar: " << queue.returnSize() << std::endl;
 
     return 0;
 }

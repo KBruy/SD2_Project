@@ -9,11 +9,16 @@ class UnsortedArrayPriorityQueue {
         int size;
         int capacity;
 
+        void resize();
+
     public:
         UnsortedArrayPriorityQueue();
         ~UnsortedArrayPriorityQueue();
 
+        void print();
+
         int returnSize();
+        void insert(int value, int priority); //dodaje element
     
 };
 

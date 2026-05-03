@@ -92,25 +92,23 @@ QueueElement UnsortedArrayPriorityQueue::extractMax() {
         emptyElement.value = -1;
         emptyElement.priority = -1;
         return emptyElement;
-
     }
 
     int maxIndex = 0;
 
-    //szukamy indeksu elementu o najwszykim priorytecie
+    //szukamy indeksu z najwiekszym priortytem
     for (int i = 1; i < size; i++) {
         if (array[i].priority > array[maxIndex].priority) {
             maxIndex = i;
         }
+    
     }
 
-    //zapamietujemy element, ktory zostanie usuniety
+    //zapamietujemy elemnt, ktory zostanie usunirety
     QueueElement maxElement = array[maxIndex];
 
-    //przesuwamy elementy w lewo, aby usunac znaleziony element
-    for (int i = maxIndex; i < size - 1; i++) {
-        array[i] = array[i+1];
-    }
+    //w miejsce usuwanego elementu wstawiamy ostatni element z tablicy
+    array[maxIndex] = array[size - 1];
 
     size--;
 

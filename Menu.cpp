@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include "MaxHeapPriorityQueue.h"
 #include "UnsortedArrayPriorityQueue.h"
+#include "Research.h"
 
 void Menu::run() {
     int choice = -1;
@@ -25,7 +26,8 @@ void Menu::run() {
                 arrayMenu();
                 break;
             case 3:
-                std::cout << "Badania" << std::endl;
+                Research research;
+                research.runAll();
                 break;
             case 0:
                 std::cout << "Koniec programu" << std::endl;

@@ -54,38 +54,81 @@ void Research::generateData(QueueElement* data, int size, int seed){
     }
 }
 
-void Research::measureMaxHeapInsert(std::ofstream& file, int size, int series, int seed){
-    QueueElement* data = new QueueElement[size];
-
-    //generujemy dane przed pomiarem
-    generateData(data, size, seed);
-
-    //tworzymy kopie struktury przed pomiarem
+MaxHeapPriorityQueue* Research::prepareMaxHeapCopies(QueueElement* data, int size) {
     MaxHeapPriorityQueue* copies = new MaxHeapPriorityQueue[COPIES_COUNT];
 
-    for (int copy = 0;copy < COPIES_COUNT; copy++) {
+    for (int copy = 0; copy < COPIES_COUNT; copy++) {
         for (int i = 0; i < size; i++) {
             copies[copy].insert(data[i].value, data[i].priority);
         }
     }
+    
+    return copies;
+}
 
-    //przygotowanie elementu dodawanaego
+void Research::saveResult(std::ofstream& file, const char* structureName, const char* operationName, int size, int series, int seed, long long totalTime){
+    double avgTime = static_cast<double>(totalTime) / COPIES_COUNT;
+
+    file << structureName<<","<<operationName<<","<<size<<","<<series<<","<<seed<<","<<COPIES_COUNT<<","<<totalTime<<","<<avgTime<<"\n";
+}
+
+//==========================================================================
+
+void Research::measureMaxHeapInsert(std::ofstream& file, int size, int series, int seed) {
+    QueueElement* data = new QueueElement[size];
+
+    // generujemy dane przed pomiarem
+    generateData(data, size, seed);
+
+    // przygotowujemy kopie struktury przed pomiarem
+    MaxHeapPriorityQueue* copies = prepareMaxHeapCopies(data, size);
+
+    // przygotowujemy element dodawany w badanej operacji
     int newValue = generateRandomNumber(0, MAX_VALUE);
     int newPriority = generateRandomNumber(0, 10 * size);
 
     auto start = std::chrono::high_resolution_clock::now();
 
+    // mierzymy tylko sama operacje insert na gotowych kopiach
     for (int copy = 0; copy < COPIES_COUNT; copy++) {
         copies[copy].insert(newValue, newPriority);
-
     }
 
     auto end = std::chrono::high_resolution_clock::now();
 
     long long totalTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-    double avgTime = static_cast<double>(totalTime) / COPIES_COUNT;
 
-    file << "MaxHeap,insert,"<<size<<","<<series<<","<<seed<<","<<COPIES_COUNT<<","<<totalTime<<","<<avgTime<<"\n";
+    saveResult(file, "MaxHeap", "insert", size, series, seed, totalTime);
+
+    delete[] copies;
+    delete[] data;
+}
+
+void Research::measureMaxHeapPeek(std::ofstream& file, int size, int series, int seed) {
+    QueueElement* data = new QueueElement[size];
+
+    // generujemy dane przed pomiarem
+    generateData(data, size, seed);
+
+    // przygotowujemy kopie struktury przed pomiarem
+    MaxHeapPriorityQueue* copies = prepareMaxHeapCopies(data, size);
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    for (int copy = 0; copy < COPIES_COUNT; copy++) {
+        QueueElement result = copies[copy].peek();
+
+        // uzycie wyniku, zeby kompilator nie pominal operacji
+        if (result.priority == -2) {
+            std::cout << "";
+        }
+    }
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    long long totalTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+
+    saveResult(file, "MaxHeap", "peek", size, series, seed, totalTime);
 
     delete[] copies;
     delete[] data;

@@ -26,8 +26,6 @@ void Research::runAll() {
 
     file << "structure,operation,size,series,seed,copies,total_time_ns,avg_time_ns\n";
 
-    file.close();
-    std::cout<<"Utworzono plik results.csv" <<std::endl;
 
     int testSize = 10;
 int testSeed = BASE_SEED;
@@ -49,12 +47,15 @@ for (int i = 0; i < testSize; i++) {
 }
 
 delete[] data;
+
+file.close();
+    std::cout<<"Utworzono plik results.csv" <<std::endl;
 }
 
 void Research::generateData(QueueElement* data, int size, int seed){
     srand(seed);
 
-    int maxPriority = 10*size; //zakres kilkukrotnie wiekszy od rozmiaru struktury
+    int maxPriority = 10 * size; //zakres kilkukrotnie wiekszy od rozmiaru struktury
 
     for (int i = 0; i < size; i++) {
         data[i].value = generateRandomNumber(0, MAX_VALUE);

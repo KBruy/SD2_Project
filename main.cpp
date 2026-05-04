@@ -1,35 +1,70 @@
 #include <iostream>
 #include "MaxHeapPriorityQueue.h"
+#include "UnsortedArrayPriorityQueue.h"
 
 int main() {
-    MaxHeapPriorityQueue queue;
+    MaxHeapPriorityQueue heapQueue;
+    UnsortedArrayPriorityQueue arrayQueue;
 
-    queue.insert(100, 5);
-    queue.insert(200, 10);
-    queue.insert(300, 3);
-    queue.insert(400, 20);
-    queue.insert(500, 15);
-    queue.insert(600, 30);
+    // te same dane dodajemy do obu implementacji
+    heapQueue.insert(100, 5);
+    heapQueue.insert(200, 30);
+    heapQueue.insert(300, 10);
+    heapQueue.insert(400, 1);
+    heapQueue.insert(500, 20);
 
-    queue.print();
+    arrayQueue.insert(100, 5);
+    arrayQueue.insert(200, 30);
+    arrayQueue.insert(300, 10);
+    arrayQueue.insert(400, 1);
+    arrayQueue.insert(500, 20);
 
-    bool changed = queue.modifyKey(200, 50);
+    std::cout << "=== Kopiec MAX ===" << std::endl;
+    heapQueue.print();
 
-    if (changed) {
-        std::cout << "Zmieniono priorytet elementu 200." << std::endl;
-    } else {
-        std::cout << "Nie znaleziono elementu." << std::endl;
-    }
+    std::cout << "=== Tablica nieposortowana ===" << std::endl;
+    arrayQueue.print();
 
-    queue.print();
+    QueueElement heapMax = heapQueue.peek();
+    QueueElement arrayMax = arrayQueue.peek();
 
-    QueueElement maxElement = queue.peek();
-
-    std::cout << "Najwiekszy element: "
-              << maxElement.value
+    std::cout << std::endl;
+    std::cout << "Peek kopiec: "
+              << heapMax.value
               << ", priorytet: "
-              << maxElement.priority
+              << heapMax.priority
               << std::endl;
+
+    std::cout << "Peek tablica: "
+              << arrayMax.value
+              << ", priorytet: "
+              << arrayMax.priority
+              << std::endl;
+
+    QueueElement heapRemoved = heapQueue.extractMax();
+    QueueElement arrayRemoved = arrayQueue.extractMax();
+
+    std::cout << std::endl;
+    std::cout << "Extract kopiec: "
+              << heapRemoved.value
+              << ", priorytet: "
+              << heapRemoved.priority
+              << std::endl;
+
+    std::cout << "Extract tablica: "
+              << arrayRemoved.value
+              << ", priorytet: "
+              << arrayRemoved.priority
+              << std::endl;
+
+    std::cout << std::endl;
+    std::cout << "Po usunieciu max:" << std::endl;
+
+    std::cout << "Kopiec:" << std::endl;
+    heapQueue.print();
+
+    std::cout << "Tablica:" << std::endl;
+    arrayQueue.print();
 
     return 0;
 }

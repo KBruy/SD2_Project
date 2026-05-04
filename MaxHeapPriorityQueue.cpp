@@ -99,12 +99,12 @@ void MaxHeapPriorityQueue::heapifyDown(int index) {
         int rightChild = 2 * index + 2;
         int largest = index;
 
-        //sprawdzamy czy lewe dziecko ma wiekszy priorytet
-        if (leftChild < size && heap[rightChild].priority > heap[largest].priority) {
-            largest = rightChild;
+        // sprawdzamy czy lewe dziecko ma wiekszy priorytet
+        if (leftChild < size && heap[leftChild].priority > heap[largest].priority) {
+            largest = leftChild;
         }
 
-        // -||- czy prawe
+        // sprawdzamy czy prawe dziecko ma wiekszy priorytet
         if (rightChild < size && heap[rightChild].priority > heap[largest].priority) {
             largest = rightChild;
         }
@@ -114,8 +114,7 @@ void MaxHeapPriorityQueue::heapifyDown(int index) {
             break;
         }
 
-        //zamieniamy rodzica z wiekszym dzieckiem
-
+        // zamieniamy rodzica z wiekszym dzieckiem
         QueueElement temp = heap[index];
         heap[index] = heap[largest];
         heap[largest] = temp;

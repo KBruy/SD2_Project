@@ -165,3 +165,33 @@ void Research::measureMaxHeapExtractMax(std::ofstream& file, int size, int serie
     delete[] copies;
     delete[] data;
 }
+
+void Research::measureMaxHeapModifyKey(std::ofstream& file, int size, int series, int seed) {
+    QueueElement* data = new QueueElement[size];
+
+    generateData(data, size, seed);
+    MaxHeapPriorityQueue* copies = prepareMaxHeapCopies(data, size);
+
+    //wybieramy wartosc ktora na pewo jest w danych
+    int valueToModify = data[size / 2].value;
+
+    //losowanie nowego priorytetu
+    int newPriority = generateRandomNumber(0, 10 * size);
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    for (int copy = 0; copy < COPIES_COUNT; copy++) {
+        bool changed = copies[copy].modifyKey(valueToModify, newPriority);
+
+        if (!changed) {std::cout << "";}
+    }
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    long long totalTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+    saveResult(file, "MaxHeap", "modifyKey", size, series, seed, totalTime);
+
+    delete[] copies;
+    delete[] data;
+
+}

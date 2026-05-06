@@ -4,6 +4,7 @@
 #include "QueueElement.h"
 #include <fstream>
 #include "MaxHeapPriorityQueue.h"
+#include "UnsortedArrayPriorityQueue.h"
 
 class Research {
     private:
@@ -18,6 +19,11 @@ class Research {
         void measureMaxHeapExtractMax(std::ofstream& file, int size, int series, int seed); //pomiar extractMax
         void measureMaxHeapModifyKey(std::ofstream& file, int size, int series, int seed); //mierzy modifyKey
         void measureMaxHeapReturnSize(std::ofstream& file, int size, int series, int seed); //pomiar returnSize kopca
+
+        UnsortedArrayPriorityQueue* prepareArrayCopies(QueueElement* data, int size); //przygotwanie danych
+        
+
+
 
     public:
         void runAll(); //uruchamia wszystkie badania i zapisuje wyniki do csv

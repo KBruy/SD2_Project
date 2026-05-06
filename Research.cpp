@@ -228,5 +228,20 @@ void Research::measureMaxHeapReturnSize(std::ofstream& file, int size, int serie
 
     delete[] copies;
     delete[] data;
- 
+}
+
+UnsortedArrayPriorityQueue* Research::prepareArrayCopies(QueueElement* data, int size) {
+    //tworzenie dynamicznej tablicy kopii kolejki na tablicy nieposrtowanej
+
+    UnsortedArrayPriorityQueue* copies = new UnsortedArrayPriorityQueue[COPIES_COUNT];
+
+    // kazda kopia dostaje ten sam zestaw danych
+    for (int copy = 0; copy < COPIES_COUNT; copy++) {
+        for (int i = 0; i < size; i++) {
+            copies[copy].insert(data[i].value, data[i].priority);
+        }
+    }
+
+    return copies;
+    
 }

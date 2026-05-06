@@ -17,6 +17,7 @@ class Research {
         void measureMaxHeapPeek(std::ofstream& file, int size, int series, int seed); // pomiar peek
         void measureMaxHeapExtractMax(std::ofstream& file, int size, int series, int seed); //pomiar extractMax
         void measureMaxHeapModifyKey(std::ofstream& file, int size, int series, int seed); //mierzy modifyKey
+        void measureMaxHeapReturnSize(std::ofstream& file, int size, int series, int seed); //pomiar returnSize kopca
 
     public:
         void runAll(); //uruchamia wszystkie badania i zapisuje wyniki do csv

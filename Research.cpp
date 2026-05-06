@@ -38,6 +38,8 @@ void Research::runAll() {
             measureMaxHeapInsert(file, currentSize, series, seed);
             measureMaxHeapPeek(file, currentSize, series, seed);
             measureMaxHeapExtractMax(file, currentSize, series, seed);
+            measureMaxHeapModifyKey(file, currentSize, series, seed);
+            measureMaxHeapReturnSize(file, currentSize, series, seed);
         }
     }
 
@@ -194,4 +196,37 @@ void Research::measureMaxHeapModifyKey(std::ofstream& file, int size, int series
     delete[] copies;
     delete[] data;
 
+}
+
+void Research::measureMaxHeapReturnSize(std::ofstream& file, int size, int series, int seed){
+    QueueElement* data = new QueueElement[size];
+
+    // generuemy dane przed pomiarem
+    generateData(data, size, seed);
+
+    // przygototwanie kopii strkutry przed pomiarem
+
+    MaxHeapPriorityQueue* copies = prepareMaxHeapCopies(data, size);
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    // mierzymy tylko sama operacje returnSize na gotowych kopiach
+    for (int copy = 0; copy < COPIES_COUNT; copy++) {
+        int result = copies[copy].returnSize();
+
+        // uzycie wyniku zeby kompilator nie pomial operacji
+        if (result == -1) {
+            std::cout<<"";
+        }
+    }
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    long long totalTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+
+    saveResult(file, "MaxHeap", "returnSize", size, series, seed, totalTime);
+
+    delete[] copies;
+    delete[] data;
+ 
 }

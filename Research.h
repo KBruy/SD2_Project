@@ -21,6 +21,7 @@ class Research {
         void measureMaxHeapReturnSize(std::ofstream& file, int size, int series, int seed); //pomiar returnSize kopca
 
         UnsortedArrayPriorityQueue* prepareArrayCopies(QueueElement* data, int size); //przygotwanie danych
+        void measureArrayInsert(std::ofstream& file, int size, int series, int seed); //pomiar insert dla tablic
         
 
 

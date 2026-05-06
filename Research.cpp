@@ -40,6 +40,8 @@ void Research::runAll() {
             measureMaxHeapExtractMax(file, currentSize, series, seed);
             measureMaxHeapModifyKey(file, currentSize, series, seed);
             measureMaxHeapReturnSize(file, currentSize, series, seed);
+            
+            measureArrayInsert(file, currentSize, series, seed);
         }
     }
 
@@ -243,5 +245,35 @@ UnsortedArrayPriorityQueue* Research::prepareArrayCopies(QueueElement* data, int
     }
 
     return copies;
+}
+
+void Research::measureArrayInsert(std::ofstream& file, int size, int series, int seed) {
+    QueueElement* data = new QueueElement[size];
+
+    //generujemy dane przed pomiarem 
+    generateData(data, size, seed);
+
+    //przygotowanie kopii
+    UnsortedArrayPriorityQueue* copies = prepareArrayCopies(data, size);
+
+    // przygotowujemy element dodawany w badanej operacji
+
+    int newValue = generateRandomNumber(0, MAX_VALUE);
+    int newPriority = generateRandomNumber(0, 10*size);
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    for (int copy = 0; copy < COPIES_COUNT; copy++) {
+        copies[copy].insert(newValue, newPriority);
+    }
+
+    auto end = std::chrono::high_resolution_clock::now();
     
+    long long totalTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+
+    saveResult(file, "UnsortedArray","insert",size, series, seed, totalTime);
+
+    delete[] copies;
+    delete[] data;
+
 }

@@ -44,6 +44,7 @@ void Research::runAll() {
             measureArrayInsert(file, currentSize, series, seed);
             measureArrayPeek(file, currentSize, series, seed);
             measureArrayExtractMax(file, currentSize, series, seed);
+            measureArrayReturnSize(file, currentSize, series, seed);
         }
     }
 
@@ -357,6 +358,33 @@ void Research::measureArrayModifiKey(std::ofstream& file, int size, int series, 
 
     long long totalTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     saveResult(file, "UnsortedArray", "modifyKey", size, series, seed, totalTime);
+
+    delete[] copies;
+    delete[] data;
+}
+
+void Research::measureArrayReturnSize(std::ofstream& file, int size, int series, int seed){
+    QueueElement* data = new QueueElement[size];
+
+    generateData(data, size, seed);
+
+    UnsortedArrayPriorityQueue* copies = prepareArrayCopies(data, size);
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    for (int copy = 0; copy < COPIES_COUNT; copy++) {
+        int result = copies[copy].returnSize();
+
+        //użycie wyniku żeby nie pomijac operacji
+        if (result == -1) {
+            std::cout<<"";
+        }
+    }
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    long long totalTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+    saveResult(file, "UnsortedArray", "returnSize", size, series, seed, totalTime);
 
     delete[] copies;
     delete[] data;

@@ -25,7 +25,7 @@ class Research {
         void measureArrayPeek(std::ofstream& file, int size, int series, int seed); //pomiar ppek
         void measureArrayExtractMax(std::ofstream& file, int size, int series, int seed);
         void measureArrayModifiKey(std::ofstream& file, int size, int series, int seed);
-        
+        void measureArrayReturnSize(std::ofstream& file, int size, int series, int seed);
 
 
     public:

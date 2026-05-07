@@ -12,20 +12,21 @@ class Research {
         
         void generateData(QueueElement* data, int size, int seed); //przygotowywuje dane do badan
         MaxHeapPriorityQueue* prepareMaxHeapCopies(QueueElement* data, int size); //tworzy kopie kopca do pomiarow
-        void saveResult(std::ofstream& file, const char* structureName, const char* operationName, int size, int series, int seed, long long totalTime);
+        void saveRawResult(std::ofstream& file, const char* structureName, const char* operationName, int size, int series, int seed, long long totalTime, double avgTime);
+        void saveSummaryResult(std::ofstream& file, const char* structureName, const char* operationName, int size, double avgTime);
 
-        void measureMaxHeapInsert(std::ofstream& file, int size, int series, int seed); //pomiar insert kopca
-        void measureMaxHeapPeek(std::ofstream& file, int size, int series, int seed); // pomiar peek
-        void measureMaxHeapExtractMax(std::ofstream& file, int size, int series, int seed); //pomiar extractMax
-        void measureMaxHeapModifyKey(std::ofstream& file, int size, int series, int seed); //mierzy modifyKey
-        void measureMaxHeapReturnSize(std::ofstream& file, int size, int series, int seed); //pomiar returnSize kopca
+        double measureMaxHeapInsert(std::ofstream& file, int size, int series, int seed); //pomiar insert kopca
+        double measureMaxHeapPeek(std::ofstream& file, int size, int series, int seed); // pomiar peek
+        double measureMaxHeapExtractMax(std::ofstream& file, int size, int series, int seed); //pomiar extractMax
+        double measureMaxHeapModifyKey(std::ofstream& file, int size, int series, int seed); //mierzy modifyKey
+        double measureMaxHeapReturnSize(std::ofstream& file, int size, int series, int seed); //pomiar returnSize kopca
 
         UnsortedArrayPriorityQueue* prepareArrayCopies(QueueElement* data, int size); //przygotwanie danych
-        void measureArrayInsert(std::ofstream& file, int size, int series, int seed); //pomiar insert dla tablic
-        void measureArrayPeek(std::ofstream& file, int size, int series, int seed); //pomiar ppek
-        void measureArrayExtractMax(std::ofstream& file, int size, int series, int seed);
-        void measureArrayModifiKey(std::ofstream& file, int size, int series, int seed);
-        void measureArrayReturnSize(std::ofstream& file, int size, int series, int seed);
+        double measureArrayInsert(std::ofstream& file, int size, int series, int seed); //pomiar insert dla tablic
+        double measureArrayPeek(std::ofstream& file, int size, int series, int seed); //pomiar ppek
+        double measureArrayExtractMax(std::ofstream& file, int size, int series, int seed);
+        double measureArrayModifiKey(std::ofstream& file, int size, int series, int seed);
+        double measureArrayReturnSize(std::ofstream& file, int size, int series, int seed);
 
 
     public:

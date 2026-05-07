@@ -24,6 +24,8 @@ class Research {
         void measureArrayInsert(std::ofstream& file, int size, int series, int seed); //pomiar insert dla tablic
         void measureArrayPeek(std::ofstream& file, int size, int series, int seed); //pomiar ppek
         void measureArrayExtractMax(std::ofstream& file, int size, int series, int seed);
+        void measureArrayModifiKey(std::ofstream& file, int size, int series, int seed);
+        
 
 
     public:

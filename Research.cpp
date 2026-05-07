@@ -331,3 +331,33 @@ void Research::measureArrayExtractMax(std::ofstream& file, int size, int series,
     delete[] copies;
     delete[] data;
 }
+
+void Research::measureArrayModifiKey(std::ofstream& file, int size, int series, int seed) {
+    QueueElement* data = new QueueElement[size];
+
+    generateData(data, size, seed);
+
+    UnsortedArrayPriorityQueue* copies = prepareArrayCopies(data, size);
+
+    int valueToModify = data[size / 2].value;
+
+    int newPriority = generateRandomNumber(0, 10 * size);
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    for (int copy = 0; copy < COPIES_COUNT; copy++) {
+        bool changed = copies[copy].modifyKey (valueToModify, newPriority);
+
+        if (!changed) {
+            std::cout<<"";
+        }
+    }
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    long long totalTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+    saveResult(file, "UnsortedArray", "modifyKey", size, series, seed, totalTime);
+
+    delete[] copies;
+    delete[] data;
+}

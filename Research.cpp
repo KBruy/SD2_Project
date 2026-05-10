@@ -12,8 +12,8 @@ const int COPIES_COUNT = 100;
 const int BASE_SEED = 12345;
 const int MAX_VALUE = 16777215;
 
-const int SIZES_COUNT = 7;
-const int TEST_SIZES[SIZES_COUNT] = {5000, 10000, 25000, 50000, 100000, 250000, 500000};
+const int SIZES_COUNT = 8;
+const int TEST_SIZES[SIZES_COUNT] = {5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000};
 
 int Research::generateRandomNumber(int minValue, int maxValue) {
     // losowanie z zakresu minValue - maxValue
